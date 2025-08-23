@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+  weight: ['300', '400', '500', '600', '700'],
+  fallback: ['system-ui', 'Arial', 'sans-serif'], 
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -24,8 +25,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        {/* Preconnect to Google Tag Manager (or other third-party service) */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+        {/* Optional: DNS-prefetch if preconnect isn't required */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+        {/* Add more preconnect or dns-prefetch links as needed */}
+      </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jakartaSans.variable} antialiased h-dvh`}
       >
         {children}
       </body>
