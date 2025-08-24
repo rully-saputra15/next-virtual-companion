@@ -10,7 +10,7 @@ const LandingPage = () => {
   return (
     <main
       className={cn(
-        "flex flex-col justify-center items-center h-full gap-2 text-balance text-center",
+        "flex flex-col justify-center items-center h-full gap-2 text-balance text-center"
       )}
       ref={containerRef}
     >
@@ -27,7 +27,7 @@ const LandingPage = () => {
         )}
         onClick={handleGoToOnboarding}
       >
-        I'll listen
+        I&apos;ll listen
       </button>
       <small className="font-bold text-xs mt-4 text-gray-600">
         Your stories are never stored · 100% anonymous · No judgment, ever.
