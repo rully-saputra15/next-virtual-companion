@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
+import AppProviders from "@/lib/providers/appProvider";
 
 const jakartaSans = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
-  display: 'swap',
+  display: "swap",
   preload: true,
-  weight: ['300', '400', '500', '600', '700'],
-  fallback: ['system-ui', 'Arial', 'sans-serif'], 
+  weight: ["300", "400", "500", "600", "700"],
+  fallback: ["system-ui", "Arial", "sans-serif"],
   adjustFontFallback: false,
 });
 
@@ -28,17 +29,18 @@ export default function RootLayout({
       <Head>
         {/* Preconnect to Google Tag Manager (or other third-party service) */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
 
         {/* Optional: DNS-prefetch if preconnect isn't required */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
         {/* Add more preconnect or dns-prefetch links as needed */}
       </Head>
-      <body
-        className={`${jakartaSans.variable} antialiased h-dvh`}
-      >
-        {children}
+      <body className={`${jakartaSans.variable} antialiased h-dvh`}>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

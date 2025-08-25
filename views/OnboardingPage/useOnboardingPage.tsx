@@ -107,23 +107,19 @@ const useOnboardingPage = () => {
   };
 
   const handleStartChat = contextSafe(() => {
-    gsapAnimation.to(`.${CLASSNAMES.ONBOARDING.TITLE}`, {
-      autoAlpha: 0,
-    });
-    gsapAnimation.to(`.${CLASSNAMES.ONBOARDING.DESCRIPTION}`, {
-      autoAlpha: 0,
-    });
-    gsapAnimation.to(`.${CLASSNAMES.ONBOARDING.MICRO_COPY}`, {
-      autoAlpha: 0,
-    });
-    gsapAnimation.to(`.main_button`, {
-      autoAlpha: 0,
-      duration: 0.5,
+    const tl = gsapAnimation.timeline({
+      defaults: { duration: 0.5, autoAlpha: 0, ease: "power1.out" },
+      autoRemoveChildren: true,
       onComplete: () => {
         sessionStorage.setItem(basicIdentitySSKey, JSON.stringify(data));
         router.push(`${ROUTE_PATH.CHAT}`);
       },
     });
+
+    tl.to(`.${CLASSNAMES.ONBOARDING.TITLE}`, {}, 0)
+      .to(`.main_button`, {}, 0)
+      .to(`.${CLASSNAMES.ONBOARDING.DESCRIPTION}`, {}, 0)
+      .to(`.${CLASSNAMES.ONBOARDING.MICRO_COPY}`, {}, 0);
   });
 
   const handleAnswerStepper = contextSafe(

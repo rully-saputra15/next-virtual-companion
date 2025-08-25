@@ -1,3 +1,5 @@
+"use client";
+
 import ChatPage from "@/views/ChatPage";
 import React from "react";
 
