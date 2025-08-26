@@ -4,7 +4,6 @@ import "./globals.css";
 import Head from "next/head";
 import AppProviders from "@/lib/providers/appProvider";
 import Script from "next/script";
-import { initialize } from "@/lib/tracking";
 import GTMScript from "./GTMScript";
 import { Toaster } from "sonner";
 
@@ -40,9 +39,8 @@ export const metadata: Metadata = {
     "no data storage",
   ],
   applicationName: "Convo",
-  creator: "Convo",
-  publisher: "Convo",
-  themeColor: "#F6E7FF", // soft pastel
+  creator: "Rully Saputra",
+  publisher: "Rully Saputra",
   alternates: {
     canonical: "/",
     languages: {

@@ -1,4 +1,3 @@
-import { virtualFriendApiMock } from "../mocks/apiMocks";
 import { ChatApiParams } from "../types/common";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API;

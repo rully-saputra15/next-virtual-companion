@@ -11,7 +11,7 @@ export default function Layout({
   return (
     <>
       <Head>
-        <title>Convo - I'll listen</title>
+        <title>Convo - I&apos;ll listen</title>
       </Head>
       <ChatPageProvider>{children}</ChatPageProvider>
     </>
