@@ -100,7 +100,7 @@ const useChatPage = () => {
         newMessage: answer,
       });
 
-      if (res.status !== "SUCCESS") throw new Error(res.message);
+      if (res.status !== "success") throw new Error(res.message);
 
       setChat({
         message: res.message,
@@ -127,7 +127,7 @@ const useChatPage = () => {
         newMessage: "Thank you salma!",
       });
 
-      if (res.status !== "SUCCESS") throw new Error(res.message);
+      if (res.status !== "success") throw new Error(res.message);
 
       setChat({
         message: res.message,
