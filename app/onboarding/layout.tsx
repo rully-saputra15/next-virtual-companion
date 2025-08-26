@@ -1,6 +1,6 @@
-
-"use client"
+"use client";
 import { OnboardingProvider } from "@/views/OnboardingPage/useOnboardingPage";
+import Head from "next/head";
 import React from "react";
 
 export default function Layout({
@@ -8,5 +8,12 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <OnboardingProvider>{children}</OnboardingProvider>;
+  return (
+    <>
+      <Head>
+        <title>Convo - Onboarding</title>
+      </Head>
+      <OnboardingProvider>{children}</OnboardingProvider>
+    </>
+  );
 }

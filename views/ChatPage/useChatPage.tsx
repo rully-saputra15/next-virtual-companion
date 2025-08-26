@@ -4,6 +4,7 @@ import { gsapAnimation, SplitText, useGsap } from "@/animation/gsap";
 import { CLASSNAMES } from "@/config/animation";
 import { basicIdentitySSKey } from "@/config/storage";
 import useChatMutation from "@/lib/services/useChatMutation";
+import { trackCustomEvent } from "@/lib/tracking";
 import { ChatHistory, Role, TChat } from "@/lib/types/common";
 import React, {
   createContext,
@@ -12,9 +13,10 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { toast } from "sonner";
 
 type TContext = ReturnType<typeof useChatPage>;
-
+const returnPromise = new Promise<void>((resolve) => resolve());
 const initialState: TContext = {
   isSubmitChat: true,
   answer: "",
@@ -23,8 +25,8 @@ const initialState: TContext = {
     phase: "intro",
   },
   handleChangeAnswer: () => {},
-  handleSendMessge: () => {},
-  handleEndConversation: () => {},
+  handleSendMessage: () => returnPromise,
+  handleEndConversation: () => returnPromise,
 };
 
 const ChatPageContext = createContext(initialState);
@@ -88,31 +90,53 @@ const useChatPage = () => {
     });
   }, []);
 
-  const handleSendMessge = () => {
-    postChat({
-      history: chatHistories.current,
-      newMessage: answer,
-    }).then((res) => {
+  const handleSendMessage = async () => {
+    try {
+      trackCustomEvent("send_message", {
+        value: 1,
+      });
+      const res = await postChat({
+        history: chatHistories.current,
+        newMessage: answer,
+      });
+
+      if (res.status !== "SUCCESS") throw new Error(res.message);
+
       setChat({
         message: res.message,
         phase: "conversation",
       });
+
       _addNewHistory("user", answer);
       _addNewHistory("model", res.message);
+
       setAnswer("");
-    });
+    } catch (err: any) {
+      toast.error(err.message);
+      trackCustomEvent("error_api_call");
+    }
   };
 
-  const handleEndConversation = () => {
-    postChat({
-      history: chatHistories.current,
-      newMessage: "Thank you salma!",
-    }).then((res) => {
+  const handleEndConversation = async () => {
+    try {
+      trackCustomEvent("end_conversation", {
+        value: 1,
+      });
+      const res = await postChat({
+        history: chatHistories.current,
+        newMessage: "Thank you salma!",
+      });
+
+      if (res.status !== "SUCCESS") throw new Error(res.message);
+
       setChat({
         message: res.message,
         phase: "end",
       });
-    });
+    } catch (err: any) {
+      toast.error(err.message);
+      trackCustomEvent("error_api_call");
+    }
   };
 
   const handleChangeAnswer = (val: string) => setAnswer(val);
@@ -159,7 +183,7 @@ const useChatPage = () => {
       .to(
         `.${CLASSNAMES.CHAT.INTRO_CHAT}`,
         {
-          height: 150,
+          height: 100,
         },
         "-=0.4"
       )
@@ -198,7 +222,19 @@ const useChatPage = () => {
     const tl = gsapAnimation.timeline({
       defaults: { duration: 1, autoAlpha: 1 },
     });
-    tl.to(`.${CLASSNAMES.CHAT.CONVERSATION}`, {});
+    tl.to(document.body, {
+      backgroundImage:
+        "linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%)",
+    })
+      .to(`.${CLASSNAMES.CHAT.CONVERSATION}`, {})
+      .to(`.${CLASSNAMES.GENERAL.CONVO_TITLE}`, {}, "-=0.8")
+      .to(`.${CLASSNAMES.CHAT.NAME_SECTION}`, {}, "-=0.6")
+      .fromTo(
+        `.${CLASSNAMES.CHAT.PROFILE_SECTION}`,
+        { autoAlpha: 0 },
+        { scale: 1.1, autoAlpha: 1 },
+        "-=0.6"
+      );
   });
 
   return {
@@ -206,7 +242,7 @@ const useChatPage = () => {
     isSubmitChat,
     answer,
     handleChangeAnswer,
-    handleSendMessge,
+    handleSendMessage,
     handleEndConversation,
   };
 };

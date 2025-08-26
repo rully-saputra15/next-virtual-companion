@@ -2,6 +2,7 @@ import { gsapAnimation, SplitText, useGsap } from "@/animation/gsap";
 import { CLASSNAMES } from "@/config/animation";
 import { ROUTE_PATH } from "@/config/path";
 import { basicIdentitySSKey } from "@/config/storage";
+import { trackCustomEvent } from "@/lib/tracking";
 import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useRef, useState } from "react";
 
@@ -107,6 +108,11 @@ const useOnboardingPage = () => {
   };
 
   const handleStartChat = contextSafe(() => {
+    trackCustomEvent("complete_onboarding", {
+      age: data.age,
+      gender: data.gender,
+      lang: data.preferredLanguage,
+    });
     const tl = gsapAnimation.timeline({
       defaults: { duration: 0.5, autoAlpha: 0, ease: "power1.out" },
       autoRemoveChildren: true,

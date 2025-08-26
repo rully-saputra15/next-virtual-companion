@@ -6,7 +6,8 @@ import React from "react";
 import { useChatPageContext } from "../useChatPage";
 
 const SubmitSection = () => {
-  const { answer, handleChangeAnswer, handleSendMessge } = useChatPageContext();
+  const { answer, handleChangeAnswer, handleSendMessage } =
+    useChatPageContext();
   return (
     <div
       className={cn(
@@ -21,10 +22,10 @@ const SubmitSection = () => {
         className="min-h-20"
         onChange={(ev) => handleChangeAnswer(ev.currentTarget.value)}
         onKeyDown={(e) => {
-          if (e.key === "Enter") handleSendMessge();
+          if (e.key === "Enter") handleSendMessage();
         }}
       />
-      <Button onClick={handleSendMessge} className="main_button text-black">
+      <Button onClick={handleSendMessage} className="main_button text-black">
         Send
       </Button>
     </div>

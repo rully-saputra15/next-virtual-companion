@@ -1,5 +1,6 @@
 "use client";
 import { ChatPageProvider } from "@/views/ChatPage/useChatPage";
+import Head from "next/head";
 import React from "react";
 
 export default function Layout({
@@ -7,5 +8,12 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <ChatPageProvider>{children}</ChatPageProvider>;
+  return (
+    <>
+      <Head>
+        <title>Convo - I'll listen</title>
+      </Head>
+      <ChatPageProvider>{children}</ChatPageProvider>
+    </>
+  );
 }

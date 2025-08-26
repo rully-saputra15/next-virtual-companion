@@ -1,4 +1,12 @@
 export const CLASSNAMES = {
+  GENERAL:{
+    CONVO_TITLE: 'convo-title',
+  },
+  LANDING: {
+    TAGLINE: 'tagline',
+    SUBLINE: 'subline',
+    ADDITIONAL_INFORMATION: 'additional-information'
+  },
   ONBOARDING: {
     TITLE: "title",
     DESCRIPTION: "description",
@@ -13,6 +21,8 @@ export const CLASSNAMES = {
     INTRO_CHAT: 'intro-chat',
     CONVERSATION: 'conversation',
     SHARE_STORY: 'share-story',
-    END_BUTTON: 'end-button'
+    END_BUTTON: 'end-button',
+    PROFILE_SECTION: 'profile-section',
+    NAME_SECTION: 'name-section'
   }
 };
