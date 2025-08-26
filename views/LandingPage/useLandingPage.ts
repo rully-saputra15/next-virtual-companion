@@ -26,15 +26,17 @@ const useLandingPage = () => {
         y: -10
       }, "-=1")
       .from(`.${s.main_button}`,{autoAlpha: 0}, "-=0.7")
+      .from(`.${CLASSNAMES.LANDING.ADDITIONAL_INFORMATION}`, {
+        autoAlpha: 0,
+        y: -20
+      }, "-=1")
       .to(`.${s.main_button}`, {
         backgroundImage: "linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)",
         repeat: -1,
         yoyo: true,
-        duration: 3,
-      },"-=1").from(`.${CLASSNAMES.LANDING.ADDITIONAL_INFORMATION}`, {
-        autoAlpha: 0,
-        y: -20
-      }, "-=2")
+        scale: 1.1,
+        duration: 2,
+      },"-=1")
     },
     { scope: containerRef }
   );

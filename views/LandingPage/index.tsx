@@ -11,17 +11,12 @@ const LandingPage = () => {
   return (
     <main
       className={cn(
-        "flex flex-col justify-center items-center h-full gap-2 text-balance text-center relative"
+        "flex flex-col justify-center items-center h-full gap-2 text-balance text-center relative px-5 relative"
       )}
       ref={containerRef}
     >
-      <div
-        className={cn(
-          "bg-white rounded-md p-2 shadow-md",
-          CLASSNAMES.GENERAL.CONVO_TITLE
-        )}
-      >
-        <h1 className="font-bold text-2xl">Convo</h1>
+      <div className={cn(CLASSNAMES.GENERAL.CONVO_TITLE)}>
+        <h1 className="font-bold text-3xl underline">Convo</h1>
       </div>
       <p className={cn("font-medium text-xl", CLASSNAMES.LANDING.TAGLINE)}>
         Say the unsaid
@@ -34,24 +29,25 @@ const LandingPage = () => {
       >
         No need to hold it in anymore. Say it freely, I’m here with you.
       </p>
-      <button
-        role="button"
-        className={cn(
-          s.main_button,
-          "px-4 py-2 rounded-md text-sm shadow-xs font-bold text-slate-900"
-        )}
-        onClick={handleGoToOnboarding}
-      >
-        I&apos;ll listen
-      </button>
+
       <small
         className={cn(
-          "font-bold text-xs mt-4 text-gray-600",
+          "font-bold text-xs mt-4 text-gray-600 absolute bottom-20 m-auto",
           CLASSNAMES.LANDING.ADDITIONAL_INFORMATION
         )}
       >
         Your stories are never stored · 100% anonymous · No judgment, ever.
       </small>
+      <button
+        role="button"
+        className={cn(
+          s.main_button,
+          "px-4 py-2 rounded-md text-sm shadow-xs font-bold text-slate-900 mt-5"
+        )}
+        onClick={handleGoToOnboarding}
+      >
+        I&apos;ll listen
+      </button>
     </main>
   );
 };
