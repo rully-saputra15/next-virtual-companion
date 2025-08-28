@@ -20,7 +20,6 @@ const useLoading = () => {
       });
       tl.to(`.item-0`, {});
       tl.to(`.item-1`, {
-        skew: 1,
       });
       tl.to(`.item-2`, {});
     },

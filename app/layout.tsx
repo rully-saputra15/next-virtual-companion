@@ -125,8 +125,6 @@ export default function RootLayout({
 
         {/* Optional: DNS-prefetch if preconnect isn't required */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-
-        {/* Add more preconnect or dns-prefetch links as needed */}
       </Head>
       <body className={`${jakartaSans.variable} antialiased h-dvh`}>
         <AppProviders>{children}</AppProviders>
