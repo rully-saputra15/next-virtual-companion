@@ -36,9 +36,9 @@ const OnboardingPage = () => {
         ✨ You’re safe here — we don’t save this info.
       </p>
       <div className="h-10 max-h-12 px-10 mt-2">
+        <PreferredLanguageInput />
         <GenderInput />
         <AgeInput />
-        <PreferredLanguageInput />
         <Button
           className="main_button text-black font-bold w-full invisible opacity-0"
           onClick={handleStartChat}

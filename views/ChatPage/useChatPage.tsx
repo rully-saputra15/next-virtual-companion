@@ -183,7 +183,7 @@ const useChatPage = () => {
       .to(
         `.${CLASSNAMES.CHAT.INTRO_CHAT}`,
         {
-          height: 100,
+          height: 120,
         },
         "-=0.4"
       )

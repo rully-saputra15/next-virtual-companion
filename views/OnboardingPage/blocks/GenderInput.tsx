@@ -20,7 +20,7 @@ const GenderInput = () => {
     <div
       className={cn(
         "flex flex-col items-center gap-2 invisible opacity-0",
-        CLASSNAMES.ONBOARDING.FIRST_QUESTION
+        CLASSNAMES.ONBOARDING.SECOND_QUESTION
       )}
     >
       <p className="font-bold text-md">Gender</p>

@@ -74,8 +74,8 @@ const useOnboardingPage = () => {
   const handleChangeGender = (value: string) => {
     _changeData("gender", value);
     handleAnswerStepper(
-      CLASSNAMES.ONBOARDING.FIRST_QUESTION,
-      CLASSNAMES.ONBOARDING.SECOND_QUESTION
+      CLASSNAMES.ONBOARDING.SECOND_QUESTION,
+      CLASSNAMES.ONBOARDING.THIRD_QUESTION
     );
   };
 
@@ -84,14 +84,6 @@ const useOnboardingPage = () => {
   };
 
   const handleGoToPreferredLanguage = () => {
-    handleAnswerStepper(
-      CLASSNAMES.ONBOARDING.SECOND_QUESTION,
-      CLASSNAMES.ONBOARDING.THIRD_QUESTION
-    );
-  };
-
-  const handleChangePreferredLanguage = (value: string) => {
-    _changeData("preferredLanguage", value);
     const tl = gsapAnimation.timeline({ defaults: { duration: 1 } });
     tl.to(`.${CLASSNAMES.ONBOARDING.THIRD_QUESTION}`, {
       y: -20,
@@ -104,6 +96,14 @@ const useOnboardingPage = () => {
         duration: 0.3,
       },
       "-=0.2"
+    );
+  };
+
+  const handleChangePreferredLanguage = (value: string) => {
+    _changeData("preferredLanguage", value);
+    handleAnswerStepper(
+      CLASSNAMES.ONBOARDING.FIRST_QUESTION,
+      CLASSNAMES.ONBOARDING.SECOND_QUESTION
     );
   };
 

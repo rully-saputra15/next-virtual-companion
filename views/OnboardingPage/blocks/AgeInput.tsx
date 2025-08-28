@@ -12,7 +12,7 @@ const AgeInput = () => {
     <div
       className={cn(
         "flex flex-col items-stretch gap-2 invisible opacity-0",
-        CLASSNAMES.ONBOARDING.SECOND_QUESTION
+        CLASSNAMES.ONBOARDING.THIRD_QUESTION
       )}
     >
       <p className="font-bold text-md text-left self-start">Age</p>

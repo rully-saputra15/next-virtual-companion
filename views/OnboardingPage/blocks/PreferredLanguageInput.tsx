@@ -20,7 +20,7 @@ const PreferredLanguageInput = () => {
     <div
       className={cn(
         "flex flex-col items-center gap-2 invisible opacity-0",
-        CLASSNAMES.ONBOARDING.THIRD_QUESTION
+        CLASSNAMES.ONBOARDING.FIRST_QUESTION
       )}
     >
       <p className="font-bold text-md">Preferred Language</p>
