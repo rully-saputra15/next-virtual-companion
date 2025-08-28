@@ -11,14 +11,19 @@ const LandingPage = () => {
   return (
     <main
       className={cn(
-        "flex flex-col justify-center items-center h-full gap-2 text-balance text-center relative px-5 relative"
+        "flex flex-col justify-center items-center h-full gap-2 text-balance text-center relative px-5"
       )}
       ref={containerRef}
     >
-      <div className={cn(CLASSNAMES.GENERAL.CONVO_TITLE)}>
+      <div className={cn("opacity-0", CLASSNAMES.GENERAL.CONVO_TITLE)}>
         <h1 className="font-bold text-3xl underline">Convo</h1>
       </div>
-      <p className={cn("font-medium text-xl", CLASSNAMES.LANDING.TAGLINE)}>
+      <p
+        className={cn(
+          "font-medium text-xl opacity-0",
+          CLASSNAMES.LANDING.TAGLINE
+        )}
+      >
         Say the unsaid
       </p>
       <p
@@ -32,7 +37,7 @@ const LandingPage = () => {
 
       <small
         className={cn(
-          "font-bold text-xs mt-4 text-gray-600 absolute bottom-20 m-auto",
+          "font-bold text-xs mt-4 text-gray-600 absolute bottom-20 m-auto opacity-0",
           CLASSNAMES.LANDING.ADDITIONAL_INFORMATION
         )}
       >
@@ -42,7 +47,7 @@ const LandingPage = () => {
         role="button"
         className={cn(
           s.main_button,
-          "px-4 py-2 rounded-md text-sm shadow-xs font-bold text-slate-900 mt-5"
+          "px-4 py-2 rounded-md text-sm shadow-xs font-bold text-slate-900 mt-5 opacity-0"
         )}
         onClick={handleGoToOnboarding}
       >

@@ -9,27 +9,32 @@ import { trackCustomEvent } from "@/lib/tracking";
 const useLandingPage = () => {
   const containerRef = useRef(null);
   const router = useRouter();
+
+
   useGsap(
     () => {
       const tl = gsapAnimation.timeline({ defaults: { duration: 1, ease: 'power1.out' } });
+
       const subline = SplitText.create(`.${CLASSNAMES.LANDING.SUBLINE}`, {type: 'words'})
-      tl.from(`.${CLASSNAMES.GENERAL.CONVO_TITLE}`, {
-        autoAlpha: 0
+
+      tl.to(`.${CLASSNAMES.GENERAL.CONVO_TITLE}`, {
+        autoAlpha: 1
       })
-      .from(`.${CLASSNAMES.LANDING.TAGLINE}`, {
-        scale: 0.8,
-        autoAlpha: 0
+      .fromTo(`.${CLASSNAMES.LANDING.TAGLINE}`, {scale: 0.8}, {
+        scale: 1,
+        autoAlpha: 1
       }, "-=0.7")
       .from(subline.words, {
         stagger: 0.05,
         autoAlpha: 0,
-        y: -10
+        y: -10,
+        force3D: true
       }, "-=1")
-      .from(`.${s.main_button}`,{autoAlpha: 0}, "-=0.7")
-      .from(`.${CLASSNAMES.LANDING.ADDITIONAL_INFORMATION}`, {
-        autoAlpha: 0,
+      .fromTo(`.${s.main_button}`,{autoAlpha: 0}, {autoAlpha: 1}, "-=0.7")
+      .to(`.${CLASSNAMES.LANDING.ADDITIONAL_INFORMATION}`, {
+        autoAlpha: 1,
         y: -20
-      }, "-=1")
+      }, "-=2")
       .to(`.${s.main_button}`, {
         backgroundImage: "linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)",
         repeat: -1,

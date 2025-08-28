@@ -21,9 +21,6 @@ const SubmitSection = () => {
         rows={6}
         className="min-h-20"
         onChange={(ev) => handleChangeAnswer(ev.currentTarget.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") handleSendMessage();
-        }}
       />
       <Button onClick={handleSendMessage} className="main_button text-black">
         Send
