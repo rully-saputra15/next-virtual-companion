@@ -1,7 +1,17 @@
-"use client";
 import { ChatPageProvider } from "@/views/ChatPage/useChatPage";
-import Head from "next/head";
 import React from "react";
+import type { Metadata } from "next";
+import ChatPageWrapper from "./wrapper";
+
+export const metadata: Metadata = {
+  title: "Private Chat - Convo",
+  description:
+    "Your private, anonymous conversation space. No judgment, no storage.",
+  robots: {
+    index: false, // Private content shouldn't be indexed
+    follow: false,
+  },
+};
 
 export default function Layout({
   children,
@@ -10,10 +20,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <Head>
-        <title>Convo - I&apos;ll listen</title>
-      </Head>
-      <ChatPageProvider>{children}</ChatPageProvider>
+      <ChatPageWrapper>{children}</ChatPageWrapper>
     </>
   );
 }

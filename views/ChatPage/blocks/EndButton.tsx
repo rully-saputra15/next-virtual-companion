@@ -9,7 +9,7 @@ const EndButton = () => {
   return (
     <div
       className={cn(
-        "absolute bottom-4 m-auto invisible opacity-0",
+        "absolute bottom-19 m-auto invisible opacity-0 scale-125",
         CLASSNAMES.CHAT.END_BUTTON
       )}
     >

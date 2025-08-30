@@ -6,6 +6,9 @@ import AppProviders from "@/lib/providers/appProvider";
 import Script from "next/script";
 import GTMScript from "./GTMScript";
 import { Toaster } from "sonner";
+import { jsonLd } from "../config/jsonLd";
+import { enFaqJsonLd } from "@/jsonLd/enFaq";
+import { idFaqJsonLd } from "@/jsonLd/idFaq";
 
 const jakartaSans = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -24,28 +27,27 @@ export const metadata: Metadata = {
     template: "%s | Convo",
   },
   description:
-    "A gentle AI companion named Salma that listens without judgment. Start a private, anonymous chat in Bahasa Indonesia or English. Your stories are never stored.",
+    "Talk freely in a warm, anonymous chat. No account, no tracking—messages are used to reply, then deleted. A friendly ear, no judgment. Start a safe chat.",
   keywords: [
-    "Convo",
-    "Say the unsaid",
     "anonymous chat",
-    "judgment-free",
-    "AI companion",
-    "virtual friend",
-    "private conversation",
-    "safe space",
-    "Bahasa Indonesia",
-    "English",
-    "no data storage",
+    "safe anonymous chat",
+    "private chat",
+    "judgment-free chat",
+    "vent anonymously",
+    "talk to someone online",
+    "friend-like listener",
+    "no account chat",
+    "privacy-first chat",
+    "AI listener",
   ],
   applicationName: "Convo",
   creator: "Rully Saputra",
   publisher: "Rully Saputra",
   alternates: {
-    canonical: "/",
+    canonical: "https://convo.rullysaputra.com/",
     languages: {
-      en: "/",
-      id: "/",
+      en: "https://convo.rullysaputra.com/",
+      id: "https://convo.rullysaputra.com/",
     },
   },
   openGraph: {
@@ -54,15 +56,15 @@ export const metadata: Metadata = {
     title: "Convo — Say the unsaid",
     siteName: "Convo",
     description:
-      "A safe, judgment-free space to be heard. Your stories are never stored.",
-    // images: [
-    //   {
-    //     url: "/og/hero.png", // 1200×630 recommended
-    //     width: 1200,
-    //     height: 630,
-    //     alt: "Convo — Say the unsaid",
-    //   },
-    // ],
+      "A gentle place to talk, anonymously. No account or tracking; messages are used to reply, then deleted.",
+    images: [
+      {
+        url: "/og/hero.png", // 1200×630 recommended
+        width: 1200,
+        height: 630,
+        alt: "Convo — Say the unsaid",
+      },
+    ],
     locale: "en_US",
     alternateLocale: ["id_ID"],
   },
@@ -72,17 +74,12 @@ export const metadata: Metadata = {
     description:
       "Start a private, anonymous chat with Salma. No judgment. No storage.",
     creator: "@rullysaputra",
+    images: ["/og/hero.png"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
+    googleBot: { index: true, follow: true },
   },
 };
 
@@ -91,24 +88,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "Convo",
-    slogan: "Say the unsaid",
-    applicationCategory: "LifestyleApplication",
-    operatingSystem: "Web",
-    url: "https://convo.app/",
-    description:
-      "A gentle AI companion (Salma) that listens without judgment. Anonymous, private, and available in Bahasa Indonesia or English.",
-    inLanguage: ["en", "id"],
-    isAccessibleForFree: true,
-    offers: { "@type": "Offer", price: "0", priceCurrency: "IDR" },
-    audience: { "@type": "PeopleAudience", suggestedMinAge: 13 },
-    // Clarify boundaries without medical claims:
-    about:
-      "Listening & supportive conversation. Not a replacement for professional care.",
-  };
   return (
     <html lang="en">
       <Head>
@@ -130,6 +109,16 @@ export default function RootLayout({
           id="ld-json-convo"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <Script
+          id="en-faq-convo"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(enFaqJsonLd) }}
+        />
+        <Script
+          id="id-faq-convo"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(idFaqJsonLd) }}
         />
       </body>
     </html>

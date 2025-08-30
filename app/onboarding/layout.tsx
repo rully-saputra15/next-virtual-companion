@@ -1,7 +1,15 @@
-"use client";
-import { OnboardingProvider } from "@/views/OnboardingPage/useOnboardingPage";
-import Head from "next/head";
+import { Metadata } from "next";
 import React from "react";
+import OnboardingWrapper from "./wrapper";
+
+export const metadata: Metadata = {
+  title: "Get Started - Convo",
+  description: "Quick setup to personalize your anonymous chat experience.",
+  robots: {
+    index: false, // Onboarding shouldn't be indexed directly
+    follow: true,
+  },
+};
 
 export default function Layout({
   children,
@@ -10,10 +18,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <Head>
-        <title>Convo - Onboarding</title>
-      </Head>
-      <OnboardingProvider>{children}</OnboardingProvider>
+      <OnboardingWrapper>{children}</OnboardingWrapper>
     </>
   );
 }
