@@ -1,6 +1,7 @@
 export const enFaqJsonLd = {
     "@context":"https://schema.org",
     "@type":"FAQPage",
+    "inLanguage": "en-US",
     "mainEntity":[
       {
         "@type":"Question",

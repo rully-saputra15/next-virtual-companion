@@ -1,6 +1,7 @@
 export const idFaqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+        "inLanguage": "id-ID",
     "mainEntity": [
       {
         "@type": "Question",

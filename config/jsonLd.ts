@@ -24,7 +24,7 @@ export const jsonLd = {
   author: {
     "@type": "Person",
     name: "Rully Saputra",
-    url: "https://rullysaputra.com", // if you have a personal site
+    url: "https://www.linkedin.com/in/rully-saputra-7554a7138", // if you have a personal site
   },
 
   // Required for WebApplication
