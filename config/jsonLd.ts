@@ -4,6 +4,7 @@ export const jsonLd = {
   name: "Convo",
   slogan: "Say the unsaid",
   applicationCategory: "LifestyleApplication",
+  applicationSubCategory: "HealthApplication", // Mental wellness focus
   operatingSystem: "Web",
   url: "https://convo.rullysaputra.com/",
   description:
@@ -15,4 +16,24 @@ export const jsonLd = {
   // Clarify boundaries without medical claims:
   about:
     "Listening & supportive conversation. Not a replacement for professional care.",
+  // Add publisher for credibility
+  publisher: {
+    "@type": "Person",
+    name: "Rully Saputra",
+  },
+  author: {
+    "@type": "Person",
+    name: "Rully Saputra",
+    url: "https://rullysaputra.com", // if you have a personal site
+  },
+
+  // Required for WebApplication
+  browserRequirements: "Requires JavaScript. Modern web browser required.",
+
+  // Add screenshot/image
+  screenshot: "https://convo.rullysaputra.com/og/hero.png",
+
+  // Add creation/modification dates
+  dateCreated: "2024", // adjust to your actual launch date
+  dateModified: "2025-09-01",
 };

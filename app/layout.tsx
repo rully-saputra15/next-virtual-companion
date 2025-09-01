@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
 import AppProviders from "@/lib/providers/appProvider";
 import Script from "next/script";
 import GTMScript from "./GTMScript";
@@ -19,6 +18,12 @@ const jakartaSans = Plus_Jakarta_Sans({
   fallback: ["system-ui", "Arial", "sans-serif"],
   adjustFontFallback: false,
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://convo.rullysaputra.com"), // ← your prod domain
@@ -90,17 +95,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         {/* Preconnect to Google Tag Manager (or other third-party service) */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
-        />
 
         {/* Optional: DNS-prefetch if preconnect isn't required */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-      </Head>
+      </head>
       <body className={`${jakartaSans.variable} antialiased h-dvh`}>
         <AppProviders>{children}</AppProviders>
         <GTMScript />
@@ -108,16 +109,19 @@ export default function RootLayout({
         <Script
           id="ld-json-convo"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Script
           id="en-faq-convo"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(enFaqJsonLd) }}
         />
         <Script
           id="id-faq-convo"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(idFaqJsonLd) }}
         />
       </body>
