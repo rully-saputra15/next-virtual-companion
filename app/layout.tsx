@@ -118,12 +118,12 @@ export default function RootLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(enFaqJsonLd) }}
         />
-        <Script
+        {/* <Script
           id="id-faq-convo"
           type="application/ld+json"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(idFaqJsonLd) }}
-        />
+        /> */}
       </body>
     </html>
   );
