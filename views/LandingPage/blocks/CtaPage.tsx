@@ -38,7 +38,7 @@ const CtaPage = ({ handleGoToOnBoarding }: Props) => {
         role="button"
         className={cn(
           s.main_button,
-          "px-8 py-2 rounded-md text-sm shadow-xs font-bold text-slate-900 mt-5 opacity-0 scale-110 invisible"
+          "px-8 py-2 rounded-md text-sm shadow-xs font-bold text-slate-900 mt-5 opacity-0 scale-110 invisible cursor-pointer"
         )}
         onClick={handleGoToOnBoarding}
       >

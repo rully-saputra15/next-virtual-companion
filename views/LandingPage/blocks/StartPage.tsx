@@ -37,7 +37,7 @@ const StartPage = ({onCtaClick}: Props) => {
       </p>
       <button
         className={cn(
-          "px-6 py-2 rounded-md text-sm font-bold text-slate-900 bg-white shadow-md opacity-0",
+          "px-6 py-2 rounded-md text-sm font-bold text-slate-900 bg-white shadow-md opacity-0 cursor-pointer",
           CLASSNAMES.LANDING.START_PAGE.CTA
         )}
         onClick={onCtaClick}
