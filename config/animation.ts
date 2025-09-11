@@ -3,6 +3,12 @@ export const CLASSNAMES = {
     CONVO_TITLE: 'convo-title',
   },
   LANDING: {
+    START_PAGE: {
+      TITLE: 'start-page-title',
+      SUBTITLE: 'start-page-subtitle',
+      CTA: 'start-page-cta'
+    },
+    CTA_PAGE: 'cta-page',
     TAGLINE: 'tagline',
     SUBLINE: 'subline',
     ADDITIONAL_INFORMATION: 'additional-information'

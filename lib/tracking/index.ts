@@ -3,6 +3,7 @@
 export type EVENT_CATEGORY = "interaction";
 
 export type EVENT_NAME =
+  | 'tap_to_start'
   | "start_conversation"
   | "send_message"
   | "complete_onboarding"
