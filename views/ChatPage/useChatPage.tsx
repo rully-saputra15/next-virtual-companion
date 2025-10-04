@@ -3,6 +3,7 @@
 import { gsapAnimation, SplitText, useGsap } from "@/animation/gsap";
 import { CLASSNAMES } from "@/config/animation";
 import { basicIdentitySSKey } from "@/config/storage";
+import { MESSAGE } from "@/lib/i18n";
 import useChatMutation from "@/lib/services/useChatMutation";
 import { trackCustomEvent } from "@/lib/tracking";
 import { ChatHistory, Role, TChat } from "@/lib/types/common";
@@ -19,6 +20,7 @@ type TContext = ReturnType<typeof useChatPage>;
 const returnPromise = new Promise<void>((resolve) => resolve());
 const initialState: TContext = {
   isSubmitChat: true,
+  isErrorMutateChat: false,
   answer: "",
   chat: {
     message: "",
@@ -32,7 +34,11 @@ const initialState: TContext = {
 const ChatPageContext = createContext(initialState);
 
 const useChatPage = () => {
-  const { mutateAsync: postChat, isPending: isSubmitChat } = useChatMutation();
+  const {
+    mutateAsync: postChat,
+    isPending: isSubmitChat,
+    isError: isErrorMutateChat,
+  } = useChatMutation();
   const chatHistories = useRef<Array<ChatHistory>>([]);
   const [chat, setChat] = useState<TChat>({
     message: "",
@@ -41,13 +47,15 @@ const useChatPage = () => {
 
   const [answer, setAnswer] = useState("");
 
+  // set the identity from session storage
+  const identityRef = useRef<string>("");
+
   useEffect(() => {
     document.body.style.background = "white";
   }, []);
 
   useEffect(() => {
     if (chat.message.length > 0 && chat.phase === "intro") {
-      console.log("chat intro chat");
       _animateIntroChatResponse();
     }
   }, [chat]);
@@ -63,6 +71,7 @@ const useChatPage = () => {
 
   const { contextSafe } = useGsap(() => {}, {});
 
+  // get the identity from onboarding
   useEffect(() => {
     const ss = sessionStorage.getItem(basicIdentitySSKey);
     if (!ss) return;
@@ -77,17 +86,24 @@ const useChatPage = () => {
       Language: ${basicIdentity.preferredLanguage}
     `;
 
+    identityRef.current = identity;
+
     postChat({
       history: chatHistories.current,
       newMessage: identity,
-    }).then((res) => {
-      setChat({
-        message: res.message,
-        phase: "intro",
+    })
+      .then((res) => {
+        setChat({
+          message: res.message,
+          phase: "intro",
+        });
+        _addNewHistory("user", identity);
+        _addNewHistory("model", res.message);
+      })
+      .catch(() => {
+        trackCustomEvent("error_api_call");
+        toast.error(MESSAGE.SERVER_ERROR);
       });
-      _addNewHistory("user", identity);
-      _addNewHistory("model", res.message);
-    });
   }, []);
 
   const handleSendMessage = async () => {
@@ -112,7 +128,7 @@ const useChatPage = () => {
 
       setAnswer("");
     } catch (err: any) {
-      toast.error(err.message);
+      toast.error(MESSAGE.SERVER_ERROR);
       trackCustomEvent("error_api_call");
     }
   };
@@ -240,6 +256,7 @@ const useChatPage = () => {
   return {
     chat,
     isSubmitChat,
+    isErrorMutateChat,
     answer,
     handleChangeAnswer,
     handleSendMessage,

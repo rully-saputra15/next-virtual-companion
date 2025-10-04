@@ -3,14 +3,19 @@ import React from "react";
 import { useChatPageContext } from "./useChatPage";
 import { cn } from "@/lib/utils";
 import { CLASSNAMES } from "@/config/animation";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import SubmitSection from "./blocks/SubmitSection";
 import ChatSection from "./blocks/ChatSection";
 import EndButton from "./blocks/EndButton";
+import ErrorView from "@/components/custom/ErrorView";
 
 const ChatPage = () => {
-  const { isSubmitChat } = useChatPageContext();
+  const { isSubmitChat, isErrorMutateChat, handleSendMessage } =
+    useChatPageContext();
+
+  if (isErrorMutateChat) {
+    return <ErrorView onRetry={handleSendMessage} />;
+  }
+
   return (
     <main className="h-dvh flex flex-col items-center justify-center px-2 relative">
       {isSubmitChat ? (
