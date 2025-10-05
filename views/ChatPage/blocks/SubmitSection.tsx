@@ -11,7 +11,7 @@ const SubmitSection = () => {
   return (
     <div
       className={cn(
-        "grid w-full gap-2 px-5 invisible opacity-0 mt-4",
+        "w-full gap-2 px-5 invisible opacity-0 mt-4 space-y-2",
         CLASSNAMES.CHAT.SHARE_STORY
       )}
     >
@@ -22,7 +22,10 @@ const SubmitSection = () => {
         className="min-h-20"
         onChange={(ev) => handleChangeAnswer(ev.currentTarget.value)}
       />
-      <Button onClick={handleSendMessage} className="main_button text-black">
+      <Button
+        onClick={handleSendMessage}
+        className="main_button text-black w-full"
+      >
         Send
       </Button>
     </div>

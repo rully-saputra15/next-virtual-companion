@@ -93,12 +93,13 @@ const useChatPage = () => {
       newMessage: identity,
     })
       .then((res) => {
+        const { data } = res;
         setChat({
-          message: res.message,
+          message: data.message,
           phase: "intro",
         });
         _addNewHistory("user", identity);
-        _addNewHistory("model", res.message);
+        _addNewHistory("model", data.message);
       })
       .catch(() => {
         trackCustomEvent("error_api_call");
@@ -116,15 +117,17 @@ const useChatPage = () => {
         newMessage: answer,
       });
 
-      if (res.status !== "success") throw new Error(res.message);
+      const { data, status } = res;
+
+      if (status !== "success") throw new Error(data.message);
 
       setChat({
-        message: res.message,
+        message: data.message,
         phase: "conversation",
       });
 
       _addNewHistory("user", answer);
-      _addNewHistory("model", res.message);
+      _addNewHistory("model", data.message);
 
       setAnswer("");
     } catch (err: any) {
@@ -143,10 +146,10 @@ const useChatPage = () => {
         newMessage: "Thank you salma!",
       });
 
-      if (res.status !== "success") throw new Error(res.message);
+      if (res.status !== "success") throw new Error(res.data.message);
 
       setChat({
-        message: res.message,
+        message: res.data.message,
         phase: "end",
       });
     } catch (err: any) {
@@ -176,9 +179,9 @@ const useChatPage = () => {
     const tl = gsapAnimation.timeline({
       defaults: { duration: 1, autoAlpha: 1, ease: "power1.out" },
     });
-    const texts = SplitText.create(`.${CLASSNAMES.CHAT.RESPONSE}`, {
-      type: "words",
-    });
+    // const texts = SplitText.create(`.${CLASSNAMES.CHAT.RESPONSE}`, {
+    //   type: "words",
+    // });
     tl.to(`.${CLASSNAMES.CHAT.TITLE_NAME}`, {
       scale: 1.1,
       duration: 0.8,
@@ -196,24 +199,18 @@ const useChatPage = () => {
           }
         },
       })
-      .to(
-        `.${CLASSNAMES.CHAT.INTRO_CHAT}`,
-        {
-          height: 120,
-        },
-        "-=0.4"
-      )
-      .from(
-        texts.words,
-        {
-          stagger: 0.03,
-          duration: 0.3,
-          autoAlpha: 0,
-          y: -20,
-        },
-        "-=0.4"
-      )
-      .to(`.${CLASSNAMES.CHAT.SHARE_STORY}`, {});
+      .to(`.${CLASSNAMES.CHAT.INTRO_CHAT}`, {}, "+=0.2")
+      // .from(
+      //   texts.words,
+      //   {
+      //     stagger: 0.03,
+      //     duration: 0.3,
+      //     autoAlpha: 0,
+      //     y: -20,
+      //   },
+      //   "-=0.4"
+      // )
+      .to(`.${CLASSNAMES.CHAT.SHARE_STORY}`, {}, "-=0.2");
   });
 
   const _animateChatResponse = contextSafe(() => {

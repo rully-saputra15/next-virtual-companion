@@ -14,7 +14,7 @@ const ChatSection = () => {
       {chat.phase === "intro" && chat.message.length > 0 && (
         <div
           className={cn(
-            "invisible opacity-0 h-0 text-center text-balance",
+            "invisible opacity-0 text-center text-balance",
             CLASSNAMES.CHAT.INTRO_CHAT
           )}
           dangerouslySetInnerHTML={{

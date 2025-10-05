@@ -1,5 +1,5 @@
 export type Role = 'user' | 'model'
-
+export type Nullable<T> = T | null
 export type ChatHistory = {
   role: "user" | "model";
   parts: Array<{ text: string }>;
@@ -10,10 +10,18 @@ export type ChatApiParams = {
   history: Array<ChatHistory>;
 };
 
+export type TChatResponseData = {
+  message: string;
+  cta: Nullable<{
+    text: string,
+    link: string
+  }>
+}
+
 export type ApiResponse<T> = {
     status: string;
     statusCode: number;
-    message: T
+    data: T
 }
 
 export type Phase = 'intro' | 'conversation' | 'end';
@@ -22,4 +30,4 @@ export type TChat = {
     phase: Phase
 }
 
-export type TChatAPIResponse = ApiResponse<string>;
+export type TChatAPIResponse = ApiResponse<TChatResponseData>;
